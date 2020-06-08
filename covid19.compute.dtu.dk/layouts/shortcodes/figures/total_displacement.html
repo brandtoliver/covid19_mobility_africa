@@ -1,0 +1,32 @@
+<!-- HTML -->
+<!-- ---- -->
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Div that SVG objects are appended to -->
+<div class="flex">
+	<div class="radio-timeframe" id='radio-displacementFig'></div>
+	<div class="select-place" id='select-displacementFig'></div>
+</div>
+<div class='vis' id='vis-displacement'></div>
+
+
+<!-- JavaScript -->
+<!-- ---------- -->
+
+<!-- Code -->
+<script>
+
+	let spinnerdisplacement = new Spinner(spinnerOpts).spin(document.getElementById('vis-displacement'));
+
+	let instance_displacement;
+	d3.json('/data/'+sessionStorage.country+'_total_displacement.json').then(function(data) {
+		instance_displacement = new DeviationPlot(data, 'vis-displacement', 'displacementFig');
+		spinnerdisplacement.stop();
+		instance_displacement.setup();
+		instance_displacement.drawLayout();
+		instance_displacement.drawData();
+	})
+
+</script>
