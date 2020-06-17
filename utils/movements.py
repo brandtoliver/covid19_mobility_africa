@@ -28,24 +28,20 @@ def run(country, iso, adm_region='adm1', adm_kommune='adm2'):
     def load_prepare_tile(path, iso):
         data = pd.read_csv(path)
         data = data.loc[data.country == iso]
+        slon = data['start_lon'].to_list()
+        slat = data['start_lat'].to_list()
+        elon = data['end_lon'].to_list()
+        elat = data['end_lat'].to_list()
+
         data = data.drop([
             'country', 'date_time','start_polygon_id', 'end_polygon_id', 'n_difference',
             'tile_size', 'level', 'is_statistically_significant', 'percent_change',
-            'z_score', 'start_lat', 'start_lon', 'end_lat', 'end_lon'
-        ], axis=1)
+            'z_score', 'start_lat', 'start_lon', 'end_lat', 'end_lon','geometry'
+        ], axis=1,errors = 'ignore')
 
-        slonlat, elonlat = zip(*[
-            geom[12:-1].split(", ")
-            for geom in data.geometry
-        ])
-
-        slon, slat = zip(*[list(map(float, sll.split())) for sll in slonlat])
-        elon, elat = zip(*[list(map(float, ell.split())) for ell in elonlat])
 
         data['source_tile'] = [f"{lat},{lon}" for lat, lon in zip(np.array(slat).round(3), np.array(slon).round(3))]
         data['target_tile'] = [f"{lat},{lon}" for lat, lon in zip(np.array(elat).round(3), np.array(elon).round(3))]
-
-        data = data.drop(['geometry'], axis=1)
 
         return data
 
@@ -86,7 +82,7 @@ def run(country, iso, adm_region='adm1', adm_kommune='adm2'):
             'country', 'date_time','start_polygon_id', 'end_polygon_id', 'n_difference',
             'tile_size', 'level', 'is_statistically_significant', 'percent_change',
             'z_score', 'start_lat', 'start_lon', 'end_lat', 'end_lon', 'geometry'
-        ], axis=1)
+        ], axis=1, errors = 'ignore')
         return data
 
     def getvalid(row):
@@ -182,8 +178,7 @@ def run(country, iso, adm_region='adm1', adm_kommune='adm2'):
         with open(f"{PATH_OUT}{country}_movements_between_admin_regions.json", 'r') as fp:
             data_out = json.load(fp)
             data_out = defaultify(data_out, 0)
-        first_region = list(set(data_out.keys()) - {'_meta'})[0]
-        start = len(data_out[first_region]['_'+first_region]['baseline'])
+        start = len(data_out['_meta']['datetime'])
     else:
         data_out = defaultdict(lambda: defaultdict(lambda: defaultdict(lambda: defaultlist(lambda: [0, 0]))))
         start = 0
@@ -198,8 +193,21 @@ def run(country, iso, adm_region='adm1', adm_kommune='adm2'):
     fn_days_tile = sorted(set([fn[:-9] for fn in os.listdir(PATH_IN_TILE) if fn.endswith('.csv')]))
     fn_days_admin = sorted(set([fn[:-9] for fn in os.listdir(PATH_IN_ADMIN) if fn.endswith('.csv')]))
 
+
+    # Check to make sure the it is the same dates for each data set.
+    if fn_days_admin[0]!=fn_days_tile[0]:
+        if fn_days_admin[0] in fn_days_tile:
+            start_idx = fn_days_tile.index(fn_days_admin[0])
+            fn_days_tile = fn_days_tile[start_idx:]
+        elif fn_days_tile[0] in fn_days_admin:
+            start_idx = fn_days_admin.index(fn_days_tile[0])
+            fn_days_admin= fn_days_admin[start_idx:]
+
+    end_idx = min(len(fn_days_tile),len(fn_days_admin))
+
+
     # Loop
-    for idx, fn_day in tqdm(enumerate(fn_days_tile[start:], start), total=len(fn_days_tile[start:])):
+    for idx, fn_day in tqdm(enumerate(fn_days_tile[start:end_idx], start), total=len(fn_days_tile[start:end_idx])):
         
         # Get weekday
         dt_obj = dt.datetime(year=int(fn_day[-10:-6]), month=int(fn_day[-5:-3]), day=int(fn_day[-2:]))
@@ -251,7 +259,7 @@ def run(country, iso, adm_region='adm1', adm_kommune='adm2'):
     # Time
     data_out['_meta']['datetime'] = [
         str(dt.datetime(int(d[-10:-6]), int(d[-5:-3]), int(d[-2:])))
-        for d in fn_days_tile
+        for d in fn_days_tile[:end_idx]
     ]
 
     # Get max values
@@ -283,7 +291,7 @@ def run(country, iso, adm_region='adm1', adm_kommune='adm2'):
     # Add to _meta
     data_out['_meta']['radioOptions'] = ['percent_change', 'crisis', 'baseline']
     data_out['_meta']['defaults']['radioOption'] = 'percent_change'
-    data_out['_meta']['defaults']['t'] = len(fn_days_tile)-1
+    data_out['_meta']['defaults']['t'] = len(fn_days_tile[:end_idx])-1
     data_out['_meta']['defaults']['idx0or1'] = 0
     data_out['_meta']['variables']['legend_label_count'] = "Going to work"
     data_out['_meta']['variables']['legend_label_relative'] = "Percent change"

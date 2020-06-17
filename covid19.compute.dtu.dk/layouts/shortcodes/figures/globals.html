@@ -7,104 +7,87 @@
 		margin: 0 auto;
 		height: 370px;
 	}
-
-	.line-baseline {
+	.line-baseline { 
 		stroke: black;
 		stroke-width: 1.5;
 		fill: none;
 		stroke-dasharray: 10 5;
 		opacity: 0.2;
 	}
-
-	.line-horizontal {
+	.line-horizontal { 
 		stroke: #bdc3c7;
 		stroke-width: 1;
 		fill: none;
 		stroke-dasharray: 10 5;
 	}
-
-	.line-crisis {
+	.line-crisis { 
 		fill: none;
 		stroke: black;
 		stroke-width: 2;
 		stroke-opacity: 0.25;
 	}
-
-	.line-changeall {
+	.line-changeall { 
 		fill: none;
 		stroke: black;
 		stroke-width: 1;
 		stroke-opacity: 0.7;
 	}
-
 	.line-tooltip {
 		stroke: 'black';
 		stroke-dasharray: 5 2.5;
 		stroke-width: 1.5;
 	}
-
-	.line {
+	.line { 
 		fill: none;
 		stroke: black;
 		stroke-width: 2;
 		stroke-opacity: 0.25;
 	}
-
 	.rect-tooltip {
 		fill: white;
 		fill-opacity: 0;
 		z-index: 1;
 	}
-
 	.trendline {
-		fill: none;
+		fill: none; 
 		stroke: red;
 		stroke-width: 2.5;
 	}
-
 	.histEvent {
 		stroke: grey;
 		stroke-width: 2;
 		stroke-opacity: 1;
 	}
-
 	.histEventDot {
 		fill: grey;
 	}
-
 	.map-polygon-movements {
 		stroke: white;
 		stroke-width: 0.3;
 	}
-
 	.map-polygon-movements-circumference {
 		stroke: black;
 		stroke-width: 1;
 	}
-
 	.dot-baseline {
 		fill: white;
 		stroke: #2c3e50;
 		stroke-width: 2;
 		opacity: 0;
 	}
-
 	.dot {
 		fill: black;
 		opacity: 0.5;
 	}
-
 	.legend-label {
 		text-anchor: start;
 		font-weight: 300;
 		cursor: pointer;
 	}
-
 	.right-legend {
 		font-size: 12px;
 	}
-
-	.tooltip {
+	.tooltip {	
 		position: absolute;
 		top: 0;
 		line-height: 1;
@@ -112,33 +95,24 @@
 		padding: 12px;
 		background: rgba(0, 0, 0, 0.8);
 		color: #fff;
-		border-radius: 2px;
+		border-radius: 2px;	
 	}
-
 	.toggle {
-		-webkit-user-select: none;
-		/* Safari */
-		-moz-user-select: none;
-		/* Firefox */
-		-ms-user-select: none;
-		/* IE10+/Edge */
-		user-select: none;
-		/* Standard */
+		-webkit-user-select: none; /* Safari */        
+		-moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* IE10+/Edge */
+		user-select: none; /* Standard */
 	}
-
 	.select-place {
 		position: absolute;
 		right: 0px;
 	}
-
 	.flex {
 		display: flex;
 	}
-
 	.flex-col {
 		flex-direction: column;
 	}
-
 	.radio-rect {
 		cursor: pointer;
 		fill: #636e72;
@@ -163,19 +137,15 @@
 		font-weight: 600;
 	}
 
-	@keyframes spinner-line-fade-quick {
+@keyframes spinner-line-fade-quick {
+  0%, 39%, 100% {
+    opacity: 0.25; /* minimum opacity */
+  }
+  40% {
+    opacity: 1;
+  }
+}
 
-		0%,
-		39%,
-		100% {
-			opacity: 0.25;
-			/* minimum opacity */
-		}
-
-		40% {
-			opacity: 1;
-		}
-	}
 </style>
 
 
@@ -185,14 +155,14 @@
 
 <div style="max-height: 0px">
 	<svg>
-		<defs>
-			<pattern id="lines" height="10" width="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-				<line x1="0" y1="4" x2="10" y2="4" stroke-width="2" stroke="black" />
-			</pattern>
-			<pattern id="thinlines" height="5" width="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-				<line x1="0" y1="2" x2="10" y2="2" stroke-width="0.5" stroke="black" />
-			</pattern>
-		</defs>
+	  <defs>
+	    <pattern id="lines" height="10" width="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+	      <line x1="0" y1="4" x2="10" y2="4" stroke-width="2" stroke="black"/>
+	    </pattern>
+	    <pattern id="thinlines" height="5" width="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+	      <line x1="0" y1="2" x2="10" y2="2" stroke-width="0.5" stroke="black"/>
+	    </pattern>
+	  </defs>
 	</svg>
 </div>
 
@@ -235,10 +205,10 @@
 	function adjustBaseline(datum) {
 		datumy = d3.range(7).map(() => []);
 		datum.forEach((d, i) => {
-			datumy[i % 7].push(d[1]);
+		    datumy[i%7].push(d[1]);
 		});
 		datumy = datumy.map(d => d3.mean(d));
-		return datum.map((d, i) => [d[0], datumy[i % 7]]);
+		return datum.map((d, i) => [d[0], datumy[i%7]]);
 	}
 
 	// General utils
@@ -250,55 +220,57 @@
 		return Math.round(val * order) / order;
 	}
 
-	Date.prototype.addDays = function (n) {
-		let date = new Date(this.valueOf());
-		date.setDate(date.getDate() + n);
-		return date;
+	Date.prototype.addDays = function(n) {
+	    let date = new Date(this.valueOf());
+	    date.setDate(date.getDate() + n);
+	    return date;
 	}
 
 	function weekavg(y) {
 		let y_avg = [];
 		y.forEach((v, i) => {
-			let i0 = Math.max(0, i - 3);
-			let i1 = Math.min(y.length - 1, i + 4);
+			let i0 = Math.max(0, i-3);
+			let i1 = Math.min(y.length-1, i+4);
 			y_avg.push(d3.mean(y.slice(i0, i1)));
 		});
 		return y_avg;
 	}
 
 	function insertKSeperators(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 	}
 
-	// Session variable
-	if (sessionStorage.country == undefined) { sessionStorage.country = "Denmark"; }
-	function createWorld() {
-		var countries = ['Kenya', 'Denmark'].sort();
-		body = document.getElementsByClassName('container flex')[0];
-		toc = document.createElement('aside');
-		toc.className = "book-toc";
-		nav = document.createElement('nav');
-		nav.id = "countries";
-		ul = document.createElement('ul');
-		countries.forEach(function (item, index) {
-			li = document.createElement('li');
-			a = document.createElement('a');
-			a.text = item;
-			a.style.cursor = "pointer";
-			if (item != sessionStorage.country) {
-				a.onclick = function () {
-					sessionStorage.country = item;
-					window.location.reload();
-				};
-			} else {
-				a.style.color = "red";
-			}
-			li.appendChild(a);
-			ul.appendChild(li);
-		});
-		nav.appendChild(ul);
-		toc.appendChild(nav);
-		body.appendChild(toc);
-	}
-	createWorld();
+    // Session variable
+    if (sessionStorage.country == undefined) {sessionStorage.country = "Denmark";}
+    function createWorld() {
+        var countries = []
+        d3.json("/data/countries.json").then(function(data){
+            countries = data.sort();
+            body = document.getElementsByClassName('container flex')[0];
+            toc = document.createElement('aside');
+            toc.className = "book-toc";
+            nav = document.createElement('nav');
+            nav.id = "countries";
+            ul = document.createElement('ul');
+            countries.forEach(function (item,index){
+                li = document.createElement('li');
+                a = document.createElement('a');
+                a.text = item;
+                a.style.cursor = "pointer";
+                if (item != sessionStorage.country) {
+                    a.onclick = function() {
+                        sessionStorage.country=item;
+                        window.location.reload();
+                    };
+                } else {
+                    a.style.color = "red";
+                }   
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            nav.appendChild(ul);
+            toc.appendChild(nav);
+            body.appendChild(toc);
+        })}
+    createWorld();
 </script>

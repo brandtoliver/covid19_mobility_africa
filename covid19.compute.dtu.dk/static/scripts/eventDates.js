@@ -20,6 +20,20 @@ let eventDates = {
 	],
 	'brazil': [
 	],
-	'kenya': [
-	]
+    'france': [
+    ],
+    'spain' :[
+    ],
+    'norway':[
+    ],
+    'italy':[
+    ],
+    'iceland':[
+    ],
+    'new zealand':[
+    ],
+    'united kingdom':[
+    ],
+    'netherlands':[
+    ]
 }
