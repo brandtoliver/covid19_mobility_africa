@@ -6,7 +6,9 @@
 <!-- Div that SVG objects are appended to -->
 <div class="flex">
 	<div id="slider-time">
+		<h3 id="country"></h3>
 		<p id="value-time"></p>
+
 	</div>
 	<div class="radio-timeframe" id='radio-movementsTileFig'></div>
 </div>
@@ -26,16 +28,42 @@
 <script>
 	let spinnermovements = new Spinner(spinnerOpts).spin(document.getElementById('vis-movementsFig'));
 
-	d3.json("/data/new_nairobi.geojson").then(function (stateShape) {
-		d3.csv("/data/nairobi_move_tiles.csv").then(function (nairobi_move_tiles) {
+	d3.json("/data/" + sessionStorage.country + ".geojson").then(function (stateShape) {
+		d3.csv("/data/" + sessionStorage.country + ".csv").then(function (nairobi_move_tiles) {
 			spinnermovements.stop();
+			/*
+			function setDropdown() {
+				//d3.select('.select-place#select-' + this.uniqueId)
+				//	.append('select')
+				//	.attr('id', 'dropdown-fig' + this.uniqueId)
 
-			// Time
+				d3.select("#dropdown-fig")
+					.selectAll("option")
+					.data(['all', 'test1']).enter()
+					.append("option")
+					.text(d => d != 'all' ? d : 'Whole country')
+					.attr("value", d => d)
+					.attr("selected", d => {
+						if (d == city_filter_name) { return 'selected' };
+					});
+
+				d3.select("#dropdown-fig")
+					.on("change", () => {
+						let dropdown = document.getElementById("dropdown-fig");
+						city_filter_name = dropdown.options[dropdown.selectedIndex].value;
+						//console.log(city_filter_name)
+						clearData();
+						//redrawData();
+					})
+
+			}*/
+
+			d3.select('h3#country').text((sessionStorage.country).replace('_', ' '))
 
 			function clearData() {
 				//this.svg.selectAll('polygon').remove()
 				//this.svg.selectAll('g').remove()
-				this.svg.selectAll('path.route').remove()
+				svg.selectAll('path.route').remove()
 			}
 			var _N = []
 			nairobi_move_tiles.map(function (d) {
@@ -44,27 +72,25 @@
 
 			//var dataTime = [1, 2, 3, 4, 5]//d3.range(0, 200);
 			let N = [...new Set(_N)].length
-			console.log(N)
-
+			d3.select('p#value-time').text("2020-03-23 0000")
 			var sliderTime = d3
 				.sliderBottom()
 				.min(0)
 				.max(N - 1)
 				.step(1)//1000 * 60 * 60 * 24 * 365)
 				.width(450)
-				//.tickFormat(d3.timeFormat('%Y'))
-				.tickValues(d3.range(2, N, 7))
+				//.tickFormat(d3.timeFormat('%M'))
+				//.tickValues(d3.range(2, N, 7))
 				.tickFormat(idxToDate)
-				.default(1)//Date(2000, 10, 3))
+				//Date(2000, 10, 3))
 				.on('onchange', val => {
 					clearData()
-					console.log(val)
-					console.log(idxToDate(val))
+
 					flowsGeoJson = generateLinksGeoJson(showTopNumberOfPaths, TimeFiltered(val, nairobi_move_tiles))
 					renderPaths(flowsGeoJson)
 					drawParticles()
 
-					d3.select('p#value-time').text(val);
+					d3.select('p#value-time').text(TimeFiltered(val, nairobi_move_tiles)[0].date_time);
 				});
 
 			//console.log(index_counter)
@@ -79,7 +105,7 @@
 
 			gTime.call(sliderTime);
 
-			d3.select('p#value-time').text(sliderTime.value());
+			//d3.select('p#value-time').text(sliderTime.value());
 
 			function TimeFiltered(indexCounter, city_data) {
 				let newData = city_data.filter(function (element) {
@@ -94,8 +120,8 @@
 			// THIS ONE NEEDS FIXING
 			function idxToDate(i) {
 				let days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-				let date = new Date(2020, 2, 28);
-				date.setHours(date.getHours() + 24 * (i - 1));
+				let date = new Date(2020, 2, 24);
+				date.setHours(date.getHours() + 8 * (i - 1));
 				let dateString = "";
 				dateString += days[date.getDay()] + " ";
 				dateString += date.getDate() + "/";
@@ -134,10 +160,10 @@
 			*/
 
 			uniqueId = 'movementsTileFig';
-
+			let country_dims = { 'Nigeria_Abuja': 850, 'Nigeria_Lagos': 200, 'Kenya_Nairobi': 520, 'Kenya_Mombasa': 920 }
 			// Dimensions
 			let figureWidth = 770,
-				figureHeight = 520;
+				figureHeight = country_dims[sessionStorage.country];
 
 			const canvas = document.getElementById("vis-movementsTileCanvas")
 			const maindiv = document.getElementById("vis-movementsTileFig")
@@ -145,12 +171,13 @@
 			maindiv.style.position = 'relative'
 			maindiv.style.width = figureWidth;
 			maindiv.style.height = figureHeight;
+			maindiv.style.top = '0px';
 
 
 			canvas.height = figureHeight;
 			canvas.width = figureWidth;
 			canvas.style.position = 'absolute'
-			canvas.style.top = '0px'
+			//canvas.style.top = '0px'
 			canvas.style.zIndex = '1'
 			canvas.style.bottom = '0px'
 			canvas.style.left = '0px'
@@ -202,7 +229,7 @@
 					.attr("stroke", function (d) { if (d.percent_change > 0) { return "blue" } else { return "red" } })
 					.attr("fill", 'none')
 					.attr("stroke-opacity", function (d) { return 0.1 * d.value / maxValueParticle + 0.1 })
-					.attr("stroke-width", function (d) { return 100 * d.value / maxValueParticle + 0.3 })
+					.attr("stroke-width", function (d) { return 100 * d.value / maxValueParticle + 0.5 })
 					.attr("value", function (d) { return d.value })
 					.attr("class", "route");
 
@@ -224,13 +251,13 @@
 					if (freqCounter > 10000) { // 10000 before
 						freqCounter = 1;
 					}
-					if (freqCounter % 200 == 0) { // change this number to define number of particles
+					if (freqCounter % 600 == 0) { // change this number to define number of particles
 						d3.selectAll("path.route")
 							.each(
 								function (d) {
 									var offset = (Math.random() - .5) * 10; //Defines how far off the link the particle is. 
 
-									particles.push({ link: d, time: elapsed, offset: offset, path: this, speed: 0.3 })
+									particles.push({ link: d, time: elapsed, offset: offset, path: this, speed: 0.15 })
 								}
 							);
 					}
@@ -284,6 +311,10 @@
 			}
 
 			renderStates(stateShape)
+
+			flowsGeoJson = generateLinksGeoJson(10000, TimeFiltered(1, nairobi_move_tiles))
+			renderPaths(flowsGeoJson)
+			drawParticles()
 			//renderPaths(flowsGeoJson)
 			//drawParticles()
 		})

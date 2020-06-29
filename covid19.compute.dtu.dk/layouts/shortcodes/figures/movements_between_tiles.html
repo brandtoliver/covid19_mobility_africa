@@ -25,7 +25,7 @@
 	d3.json("/data/" + sessionStorage.country + "tile_geojson.json").then(function (geoData) {
 		d3.json('/data/' + sessionStorage.country + '_movements_between_tiles.json').then(function (data) {
 			spinnermovements.stop();
-			instance_movements = new MovementsMap(data, geoData, 'movementsFig');
+			instance_movements = new MovementsMapTile(data, geoData, 'movementsFig');
 			instance_movements.setup();
 			instance_movements.drawLayout();
 			instance_movements.drawData();
