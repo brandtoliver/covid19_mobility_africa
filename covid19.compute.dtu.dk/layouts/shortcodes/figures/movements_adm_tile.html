@@ -1,0 +1,310 @@
+<!-- HTML -->
+<!-- ---- -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Div that SVG objects are appended to -->
+<div class="flex">
+	<div id="slider-time">
+		<p id="value-time"></p>
+	</div>
+	<div class="radio-timeframe" id='radio-movementsTileFig'></div>
+</div>
+<div class="flex flex-col">
+	<div id='vis-movementsTileFig' style="height: 600;">
+		<canvas id='vis-movementsTileCanvas' />
+
+	</div>
+</div>
+
+
+<!-- JavaScript -->
+<!-- ---------- -->
+
+<!-- Code -->
+
+<script>
+	let spinnermovements = new Spinner(spinnerOpts).spin(document.getElementById('vis-movementsFig'));
+
+	d3.json("/data/new_nairobi.geojson").then(function (stateShape) {
+		d3.csv("/data/nairobi_move_tiles.csv").then(function (nairobi_move_tiles) {
+			spinnermovements.stop();
+
+			// Time
+
+			function clearData() {
+				//this.svg.selectAll('polygon').remove()
+				//this.svg.selectAll('g').remove()
+				this.svg.selectAll('path.route').remove()
+			}
+			var _N = []
+			nairobi_move_tiles.map(function (d) {
+				_N.push(d.time_index);
+			})
+
+			//var dataTime = [1, 2, 3, 4, 5]//d3.range(0, 200);
+			let N = [...new Set(_N)].length
+			console.log(N)
+
+			var sliderTime = d3
+				.sliderBottom()
+				.min(0)
+				.max(N - 1)
+				.step(1)//1000 * 60 * 60 * 24 * 365)
+				.width(450)
+				//.tickFormat(d3.timeFormat('%Y'))
+				.tickValues(d3.range(2, N, 7))
+				.tickFormat(idxToDate)
+				.default(1)//Date(2000, 10, 3))
+				.on('onchange', val => {
+					clearData()
+					console.log(val)
+					console.log(idxToDate(val))
+					flowsGeoJson = generateLinksGeoJson(showTopNumberOfPaths, TimeFiltered(val, nairobi_move_tiles))
+					renderPaths(flowsGeoJson)
+					drawParticles()
+
+					d3.select('p#value-time').text(val);
+				});
+
+			//console.log(index_counter)
+
+			let gTime = d3
+				.select('#slider-time')
+				.append('svg')
+				.attr('width', 500)
+				.attr('height', 100)
+				.append('g')
+				.attr('transform', 'translate(30,30)');
+
+			gTime.call(sliderTime);
+
+			d3.select('p#value-time').text(sliderTime.value());
+
+			function TimeFiltered(indexCounter, city_data) {
+				let newData = city_data.filter(function (element) {
+					if (Number(element["time_index"] == indexCounter)) {
+						return Number(element["time_index"])
+					}
+
+				});
+				return newData
+
+			}
+			// THIS ONE NEEDS FIXING
+			function idxToDate(i) {
+				let days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+				let date = new Date(2020, 2, 28);
+				date.setHours(date.getHours() + 24 * (i - 1));
+				let dateString = "";
+				dateString += days[date.getDay()] + " ";
+				dateString += date.getDate() + "/";
+				dateString += date.getMonth() + 1
+				return dateString
+			}
+
+			/*
+			function setSlider() {
+				// Define
+				let N = nairobi_move_tiles.datetime.length
+				let sliderStep = d3.sliderBottom()
+					.min(0)
+					.max(N - 1)
+					.width(width - rwidth - 60)
+					.tickValues(d3.range(2, N, 7))
+					.tickFormat(this.idxToDate)
+					.step(1)
+					.default(this.t)
+					.on('onchange', t => {
+						this.t = t;
+						this.clearData();
+						this.redrawData();
+					});
+
+				// Append to div
+				let gStep = d3.select('#slider-' + this.uniqueId)
+					.append('svg')
+					.attr('width', this.width - this.rwidth)
+					.attr('height', 60)
+					.append('g')
+					.attr('transform', 'translate(15,10)');
+
+				gStep.call(sliderStep)
+			}
+			*/
+
+			uniqueId = 'movementsTileFig';
+
+			// Dimensions
+			let figureWidth = 770,
+				figureHeight = 520;
+
+			const canvas = document.getElementById("vis-movementsTileCanvas")
+			const maindiv = document.getElementById("vis-movementsTileFig")
+
+			maindiv.style.position = 'relative'
+			maindiv.style.width = figureWidth;
+			maindiv.style.height = figureHeight;
+
+
+			canvas.height = figureHeight;
+			canvas.width = figureWidth;
+			canvas.style.position = 'absolute'
+			canvas.style.top = '0px'
+			canvas.style.zIndex = '1'
+			canvas.style.bottom = '0px'
+			canvas.style.left = '0px'
+			canvas.style.right = '0px'
+			//canvas.style.margin = 0
+			//canvas.style.border = 0
+
+			const context = canvas.getContext("2d")
+
+			width = figureWidth;
+			height = figureHeight;
+			//rwidth = 180;
+			//rheight = 27;
+
+			svg = d3.select("#vis-" + uniqueId)
+				.append("svg")
+				.attr("width", width)
+				.attr("height", height);
+
+			g = svg.append("g");
+
+			projection = d3.geoIdentity()
+				.reflectY(true)
+				.fitWidth(width, stateShape);
+
+			path = d3.geoPath(projection);
+
+			function renderStates(stateShape) {
+				//svg.select('#states').remove()
+				const g = svg.append('g').attr("start_quadkey", "states")
+				g.selectAll("path").data(stateShape.features)
+					.enter()
+					.append("path")
+					.attr("d", path)
+					.attr("start_quadkey", function (d) { return "quad_" + d.start_quadkey }) // "chaning state_" to quad:
+					.style("fill", "#fff")
+					.attr("stroke", "#000")
+					.attr("stroke-width", 0.9);
+			}
+			// links
+			function renderPaths(flow_data) {
+				svg.select('#routes').remove()
+				const g = svg.append('g').attr("start_quadkey", "routes")
+				g.selectAll("path").data(flow_data)
+					.enter()
+					.append("path")
+					.attr("d", d => path(d))
+					//.attr("stroke", "blue")
+					.attr("stroke", function (d) { if (d.percent_change > 0) { return "blue" } else { return "red" } })
+					.attr("fill", 'none')
+					.attr("stroke-opacity", function (d) { return 0.1 * d.value / maxValueParticle + 0.1 })
+					.attr("stroke-width", function (d) { return 100 * d.value / maxValueParticle + 0.3 })
+					.attr("value", function (d) { return d.value })
+					.attr("class", "route");
+
+			}
+			const maxValueParticle = 10000
+			const showTopNumberOfPaths = 300
+			//flowsGeoJson = generateLinksGeoJson(showTopNumberOfPaths, nairobi_move_tiles)
+
+
+			function drawParticles() {
+				// particles
+				const t = d3.timer(tick, 2000); //Number defines when movement starts
+				var particles = []
+				var freqCounter = 0
+				function tick(elapsed) {
+
+					// remove particle that have finish their paths
+					particles = particles.filter(function (d) { return d.current < d.path.getTotalLength() })
+					if (freqCounter > 10000) { // 10000 before
+						freqCounter = 1;
+					}
+					if (freqCounter % 200 == 0) { // change this number to define number of particles
+						d3.selectAll("path.route")
+							.each(
+								function (d) {
+									var offset = (Math.random() - .5) * 10; //Defines how far off the link the particle is. 
+
+									particles.push({ link: d, time: elapsed, offset: offset, path: this, speed: 0.3 })
+								}
+							);
+					}
+					drawParticlesOnCanvas(elapsed, context, null, particles);
+					freqCounter++;
+
+				}
+			}
+
+			function generateLinksGeoJson(showTopNumberOfPaths, data_nairobi) {
+				const data = data_nairobi.sort((a, b) => (a.value < b.value) ? 1 : -1)
+				const links = [];
+				for (let i = 0; i < showTopNumberOfPaths; i++) {
+					if (data[i] && data[i].end_lon && data[i].start_lon) {
+						links.push({
+							type: "LineString",
+							coordinates: [
+								[data[i].start_lon - 0.045, data[i].start_lat - 0.01],
+								[data[i].end_lon - 0.045, data[i].end_lat - 0.01],
+							],
+							value: parseInt(data[i].n_crisis), // change to n_crisis from n_baseline
+							percent_change: parseInt(data[i].percent_change),
+						});
+					}
+				}
+				return links;
+			}
+			function drawParticlesOnCanvas(elapsed, cx, particlesColorScale, particles) {
+				cx.clearRect(0, 0, 2 * width, 2 * height);
+				var x;
+
+				for (x = 0; x < particles.length; x++) {
+					var currentTime = elapsed - particles[x].time;
+					particles[x].current = .2 * particles[x].speed * currentTime / 1000 * 400; //
+					var currentPos = particles[x].path.getPointAtLength(particles[x].current)
+					cx.beginPath();
+
+					cx.fillStyle = particles[x].path.getAttribute("stroke");
+					cx.lineWidth = "3px";
+
+					cx.arc(
+						currentPos.x,
+						currentPos.y + particles[x].offset,
+						Math.sqrt(1.5 * particles[x].path.getAttribute("stroke-width")),
+						0,
+						5 * Math.PI
+					);
+					cx.stroke();
+					cx.fill();
+				}
+			}
+
+			renderStates(stateShape)
+			//renderPaths(flowsGeoJson)
+			//drawParticles()
+		})
+	})
+
+</script>
+
+<!-- 
+<script>
+
+	let spinnermovements = new Spinner(spinnerOpts).spin(document.getElementById('vis-movementsTileFig'));
+
+	let instance_movements;
+	d3.json("/data/new_nairobi.geojson").then(function (stateShape) {
+		d3.csv("/data/nairobi_move_tiles.csv").then(function (nairobi_move_tiles) {
+			spinnermovements.stop();
+			instance_movements = new Movement_adm_tile(stateShape, nairobi_move_tiles, 'movementsTileFig');
+			instance_movements.renderStates();
+			instance_movements.renderPaths();
+
+		})
+	})
+
+-->

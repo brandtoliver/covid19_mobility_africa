@@ -36,8 +36,8 @@ class MovementsMap {
 		// SVG
 		this.svg = d3.select("#vis-" + this.uniqueId)
 			.append("svg")
-				.attr("width", this.width)
-				.attr("height", this.height);
+			.attr("width", this.width)
+			.attr("height", this.height);
 
 		this.g = this.svg.append("g");
 
@@ -47,7 +47,7 @@ class MovementsMap {
 			.scaleExtent([1, 4])
 			.on("zoom", () => this.zoomed());
 		this.svg.call(zoom);
-	}	
+	}
 
 
 	// Clear and recreate
@@ -121,9 +121,9 @@ class MovementsMap {
 
 		let mapWidth = this.haversine(latMid, lonMin, latMid, lonMax);  // at midpoint
 		let mapHeight = this.haversine(latMin, lonMin, latMax, lonMin);
-		
-		console.log("mapWidth", mapWidth*1e-3)
-		console.log("mapHeight", mapHeight*1e-3)
+
+		console.log("mapWidth", mapWidth * 1e-3)
+		console.log("mapHeight", mapHeight * 1e-3)
 		console.log("latMin", latMin)
 		console.log("lonMin", lonMin)
 		console.log("latMax", latMax)
@@ -132,13 +132,13 @@ class MovementsMap {
 		if (mapWidth < mapHeight) {
 			let newWidth = this.width * mapWidth / mapHeight;
 			let dw = this.width - newWidth;
-			this.x = d3.scaleLinear().domain([lonMin, lonMax]).range([dw/2, dw/2 + newWidth]);
+			this.x = d3.scaleLinear().domain([lonMin, lonMax]).range([dw / 2, dw / 2 + newWidth]);
 			this.y = d3.scaleLinear().domain([latMin, latMax]).range([this.height, 0]);
 		} else {
 			let newHeight = this.width * mapHeight / mapWidth;
 			let dh = this.height - newHeight;
 			this.x = d3.scaleLinear().domain([lonMin, lonMax]).range([0, this.width]);
-			this.y = d3.scaleLinear().domain([latMin, latMax]).range([this.height - dh/2, dh/2]);
+			this.y = d3.scaleLinear().domain([latMin, latMax]).range([this.height - dh / 2, dh / 2]);
 		}
 	}
 
@@ -155,30 +155,30 @@ class MovementsMap {
 
 	setKeyEvents() {
 		document.onkeydown = evt => {
-		    evt = evt || window.event;
-		    if (evt.key === "Escape" || evt.key === "Esc") {
-		    	this.resetState();
-		    	this.clearData();
-		    	this.redrawData();
-		    } else
-		    if (evt.key === "Shift") {
-		    	this.idx0or1 = 1;
-		    	if (typeof this.selected != 'undefined') {
-		    		this.tooltipSelected(this.hovering);
-		    		this.recolorRegions(this.selected);
-		    	}
-		    }
+			evt = evt || window.event;
+			if (evt.key === "Escape" || evt.key === "Esc") {
+				this.resetState();
+				this.clearData();
+				this.redrawData();
+			} else
+				if (evt.key === "Shift") {
+					this.idx0or1 = 1;
+					if (typeof this.selected != 'undefined') {
+						this.tooltipSelected(this.hovering);
+						this.recolorRegions(this.selected);
+					}
+				}
 		};
 
 		document.onkeyup = evt => {
-		    evt = evt || window.event;
-		    if (evt.key === "Shift") {
-		    	this.idx0or1 = 0;
-		    	if (typeof this.selected != 'undefined') {
-		    		this.tooltipSelected(this.hovering);
-		    		this.recolorRegions(this.selected);
-		    	}
-		    }
+			evt = evt || window.event;
+			if (evt.key === "Shift") {
+				this.idx0or1 = 0;
+				if (typeof this.selected != 'undefined') {
+					this.tooltipSelected(this.hovering);
+					this.recolorRegions(this.selected);
+				}
+			}
 		};
 	}
 
@@ -205,7 +205,7 @@ class MovementsMap {
 
 		// Title text
 		this.svg.append('text')
-			.attr('x', this.width-120)
+			.attr('x', this.width - 120)
 			.attr('y', 20)
 			.attr('font-weight', 700)
 			.text(legendTitle)
@@ -215,7 +215,7 @@ class MovementsMap {
 
 			// Rects
 			this.svg.append('rect')
-				.attr('x', this.width-120)
+				.attr('x', this.width - 120)
 				.attr('y', idx * 23 + 40)
 				.attr('width', 15)
 				.attr('height', 15)
@@ -223,19 +223,19 @@ class MovementsMap {
 					if (idx == 0)
 						return 'url(#thinlines)';
 					else
-						return this.colorScale(i / (this.n_steps-1) * this.domain[1]);
+						return this.colorScale(i / (this.n_steps - 1) * this.domain[1]);
 				})
 
 			// labels
 			this.svg.append('text')
-				.attr('x', this.width-95)
+				.attr('x', this.width - 95)
 				.attr('y', idx * 23 + 52.5)
 				.attr('font-size', 13)
 				.text(() => {
 					if (idx == 0)
 						return "No data";
 					else
-						return round(i / (this.n_steps-1) * this.domain[1] * 100, 1e0) + "%";
+						return round(i / (this.n_steps - 1) * this.domain[1] * 100, 1e0) + "%";
 				})
 		})
 	}
@@ -257,9 +257,9 @@ class MovementsMap {
 						return 'radio-rect'
 				})
 				.attr('id', 'radio-rect-' + option)
-				.attr('x', this.rwidth/3 * i)
+				.attr('x', this.rwidth / 3 * i)
 				.attr('y', 0)
-				.attr('width', this.rwidth/3)
+				.attr('width', this.rwidth / 3)
 				.attr('height', this.rheight)
 				.on('click', () => this.radioClick(option))
 
@@ -273,7 +273,7 @@ class MovementsMap {
 						return 'radio-text'
 				})
 				.attr('id', 'radio-text-' + option)
-				.attr("x", this.rwidth/3 * i + this.rwidth/6)
+				.attr("x", this.rwidth / 3 * i + this.rwidth / 6)
 				.attr("y", this.rheight / 2 + 4)
 				.attr('font-size', 12)
 				.text(() => {
@@ -293,7 +293,7 @@ class MovementsMap {
 		let N = this.datetime.length
 		let sliderStep = d3.sliderBottom()
 			.min(0)
-			.max(N-1)
+			.max(N - 1)
 			.width(this.width - this.rwidth - 60)
 			.tickValues(d3.range(2, N, 7))
 			.tickFormat(this.idxToDate)
@@ -328,13 +328,13 @@ class MovementsMap {
 			this.g.selectAll(datum.kommune)
 				.data(datum.polygons)
 				.enter().append("polygon")
-			    .attr("points", polygon => polygon.map(p => [this.x(p[0]), this.y(p[1])].join(",")).join(" "))
-			    .attr("class", 'map-polygon-movements')
-			    .attr("id", datum.kommune)
-			    .style('fill', () => {
-			    	if (typeof this.selected == 'undefined')
-			    		return this.defaultFill(datum.kommune, this.t)
-			    })
+				.attr("points", polygon => polygon.map(p => [this.x(p[0]), this.y(p[1])].join(",")).join(" "))
+				.attr("class", 'map-polygon-movements')
+				.attr("id", datum.kommune)
+				.style('fill', () => {
+					if (typeof this.selected == 'undefined')
+						return this.defaultFill(datum.kommune, this.t)
+				})
 				.on('mouseover', polygon => {
 					if (dataExists) {
 						this.mouseover();
@@ -425,7 +425,7 @@ class MovementsMap {
 	tooltipSelected(d) {
 
 		let crisis = 0,
-			baseline = 0, 
+			baseline = 0,
 			percent_change = 'N/A';
 		if (d in this.data[this.selected]) {
 			if (this.t in this.data[this.selected][d]['crisis'])
@@ -433,13 +433,13 @@ class MovementsMap {
 			if (this.t in this.data[this.selected][d]['baseline'])
 				baseline = this.data[this.selected][d]['baseline'][this.t][this.idx0or1];
 			if (this.t in this.data[this.selected][d]['percent_change'])
-				percent_change = this.data[this.selected][d]['percent_change'][this.t][this.idx0or1];			
+				percent_change = this.data[this.selected][d]['percent_change'][this.t][this.idx0or1];
 		}
 
 		let tooltiptext;
-		if (this.idx0or1 == 0) 
+		if (this.idx0or1 == 0)
 			tooltiptext = "Share of <b>" + this.selected + "</b> population<br>going to work in <b>" + this.hovering + "</b><br><br>";
-		else if (this.idx0or1 == 1) 
+		else if (this.idx0or1 == 1)
 			tooltiptext = "Share of <b>" + this.hovering + "</b> population<br>going to work in <b>" + this.selected + "</b><br><br>";
 		tooltiptext += "On date: <b>" + round(crisis * 100, 1e2) + "%</b><br>";
 		tooltiptext += "Baseline: <b>" + round(baseline * 100, 1e2) + "%</b><br>";
@@ -464,27 +464,27 @@ class MovementsMap {
 	// Coloring
 	defaultFill(d, t) {
 		if (this.exists(d)) {
-    		let count = this.data[d]["_" + d][this.radioOption][this.t][0];
-    		return this.colorScale(count).hex();
-    	} else {
-    		return 'url(#thinlines)';
-    	}
+			let count = this.data[d]["_" + d][this.radioOption][this.t][0];
+			return this.colorScale(count).hex();
+		} else {
+			return 'url(#thinlines)';
+		}
 	}
 
 	highlightRegion(d, color) {
 		this.selected_polygons.push(
 			d.map(polygon => {
 				return this.g.append("polygon")
-				    .attr("points", polygon.map(p => [this.x(p[0]), this.y(p[1])].join(",")).join(" "))
-				    .style('fill', 'none')
-				    .style('stroke', color)
-				    .style('stroke-width', 1)
+					.attr("points", polygon.map(p => [this.x(p[0]), this.y(p[1])].join(",")).join(" "))
+					.style('fill', 'none')
+					.style('stroke', color)
+					.style('stroke-width', 1)
 			})
 		)
 	}
 
 	unhighlightRegion() {
-		this.selected_polygons[this.selected_polygons.length-1].forEach(polygon => {
+		this.selected_polygons[this.selected_polygons.length - 1].forEach(polygon => {
 			polygon.remove();
 		})
 		this.selected_polygons.pop()
@@ -565,7 +565,7 @@ class MovementsMap {
 	idxToDate(i) {
 		let days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 		let date = new Date(2020, 2, 28);
-		date.setHours(date.getHours() + 24 * (i-1));
+		date.setHours(date.getHours() + 24 * (i - 1));
 		let dateString = "";
 		dateString += days[date.getDay()] + " ";
 		dateString += date.getDate() + "/";
@@ -594,16 +594,16 @@ class MovementsMap {
 		return R * c;
 	}
 	minMaxArray(arr) {
-    var max = -Number.MAX_VALUE,
-        min = Number.MAX_VALUE;
-    arr.forEach(function(e) {
-        if (max < e) {
-            max = e;
-        }
-        if (min > e) {
-           min = e;
-       }
-    });
-    return {max: max, min: min};
-    }
+		var max = -Number.MAX_VALUE,
+			min = Number.MAX_VALUE;
+		arr.forEach(function (e) {
+			if (max < e) {
+				max = e;
+			}
+			if (min > e) {
+				min = e;
+			}
+		});
+		return { max: max, min: min };
+	}
 }

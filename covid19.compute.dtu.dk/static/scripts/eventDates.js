@@ -1,4 +1,6 @@
 let eventDates = {
+	'kenya': [
+	],
 	'sweden': [
 		["2020-04-30 00:00:00", 'Valborgmässoafton', 'event1'],
 		["2020-05-01 00:00:00", 'Förste maj, Public holiday in Sweden', 'event2']
@@ -20,20 +22,20 @@ let eventDates = {
 	],
 	'brazil': [
 	],
-    'france': [
-    ],
-    'spain' :[
-    ],
-    'norway':[
-    ],
-    'italy':[
-    ],
-    'iceland':[
-    ],
-    'new zealand':[
-    ],
-    'united kingdom':[
-    ],
-    'netherlands':[
-    ]
+	'france': [
+	],
+	'spain': [
+	],
+	'norway': [
+	],
+	'italy': [
+	],
+	'iceland': [
+	],
+	'new zealand': [
+	],
+	'united kingdom': [
+	],
+	'netherlands': [
+	]
 }

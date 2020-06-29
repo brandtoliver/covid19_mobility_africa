@@ -306,7 +306,7 @@ def Update_CSV(data_path, country_name, save_path=None, dat_type='popu'):
     """
     # Fetch a list of all the files
     files = check_update(data_path)
-
+    print(1)
     # import pdb;pdb.set_trace()
     if len(files) == 0:
         print('There is nothing to update')
@@ -340,6 +340,7 @@ def Update_CSV(data_path, country_name, save_path=None, dat_type='popu'):
     #     if dat_kd:
     #         df_poputile = reverse_geo_adm(df_poputile, dat_kd[0], dat_kd[1], adm + 1, dat_kd[2], move=dat_type)
 
+    print("2")
 
     # Saving the updated data
     if save_path:
@@ -348,6 +349,8 @@ def Update_CSV(data_path, country_name, save_path=None, dat_type='popu'):
         df_poputile.to_csv(data_path + file, index=False)
 
     # Run through all files and add the location for each admin level
+    print("3")
+
     for file in tqdm(files[1:]):
 
         try:
