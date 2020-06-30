@@ -4,13 +4,18 @@ headless: true
 
 - **[Main Page]({{< relref "/_index.md" >}})**
 - **Posts**
-    - *Kenya*
+    - **Kenya**
+	[Timeline]({{< relref "/posts/timeline_kenya.md" >}})
+
 		- [*Kenya*:    
         Data quality]({{< relref "/posts/data_quality_kenya.md" >}})
 
-	- *Nigeria*
+	- **Nigeria**
+	[Timeline]({{< relref "/posts/timeline_nigeria.md" >}})
 		- [*Nigeria*:    
-        Data quality]({{< relref "/posts/data_quality_kenya.md" >}})
+        Data quality]({{< relref "/posts/data_quality_nigeria.md" >}})
+
+	<!--	
 	- *Denmark*
     	- [18 - *Denmark*:   
         Back to work]({{< relref "/posts/going_to_work.md" >}})
@@ -24,14 +29,14 @@ headless: true
 		
 - **Visualizations**
 	- *Where people are*
-		- [Landscape]({{< relref "/visualizations/where_people_are_landscape.md" >}})
+		<!-- -- [Landscape]({{< relref "/visualizations/where_people_are_landscape.md" >}})-->
 		- [Going out]({{< relref "/visualizations/where_people_are_going_out.md" >}})
 		- [Change in population size]({{< relref "/visualizations/where_people_are_change_in_population_size.md" >}})
 		- [Population distribution]({{< relref "/visualizations/where_people_are_population_concentration.md" >}})
 	- *How people move*
 		- [**New** Particle city movement]({{< relref "/visualizations/movement_adm_tile.md" >}})
 		- [**New** Tile city movement]({{< relref "/visualizations/how_people_move_movements_between_tiles.md" >}})
-		- [Distance traveled]({{< relref "/visualizations/how_people_move_distance_traveled.md" >}})
+		<!-- - [Distance traveled]({{< relref "/visualizations/how_people_move_distance_traveled.md" >}}) -->
 		- [Staying home]({{< relref "/visualizations/how_people_move_staying_home.md" >}})
 		<!-- - [Movements between municipalities]({{< relref "/visualizations/how_people_move_movements_between_municipalities.md" >}}) -->
 - **Data**

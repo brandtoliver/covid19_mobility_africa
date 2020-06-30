@@ -3,7 +3,21 @@
 
 {{< figures/globals >}}
 
+The movement data can provide us with insights on how people are moving between different locations. In this case due to limited data, it has been decided to focus only on the larger cities in Kenya and Nigeria. The movements between tiles are shown for each time-slot. 
+
+The map shows the outline of the selected city, while the edges represent movements between tiles within the city. The larger the size of the edges and particles is, the more people move between the tiles. 
+
+* The **{{< color color="#c0392b" >}}red{{< /color >}}** edges means that there is less movement than the baseline.
+
+* The **{{< color color="#1E90FF" >}}blue{{< /color >}}** edges means that there is more movement than the baseline.
+
+{{< figures/movements_adm_tile >}}
+
+
 <!-- {{< vspace 20 >}} -->
+
+<!--
+test
 
 Using the Movement Maps we can visualize the distribution where people spend their days relative to their nights. While not accurate in every single case, it's perhaps easier to say that we are able to see where people *live* (spend their nights) and *work* (spend their nights). Or even more compactly, that we can look at commuting patterns over time.
 
@@ -28,3 +42,4 @@ When moving the slider through time it is clear that that the deviation—the *c
 > * **Press** the escape key to unselect a region.
 
 *Note*: When clicking an administrative region, *Change* values displayed on other regions can be dramatically large. This is because, typically, only a small share of region populations work outside their home region, and because of the deviation calculation is as simple as (*A* - *B*) / *B*, they can blow up if *B* is small.
+--> 

@@ -7,11 +7,11 @@ In the Movement maps dataset, one movement is recorded for each active user. A m
 
 It is, therefore, clear that the most likely type of movement to be recorded in the Movement maps are trips between home and work.
 
-For this visualization we have counted the fraction of the population that spent most of their time during working (10–18) and late-afternoon hours (18–02) in the same tile. Given the constraints in the data due to preprocessing by Facebook, it is best interpreted as **a conservative upper bound on the number of individuals that do not go to work** during the day.
+For this visualization we have counted the fraction of the population that spent most of their time during working hours and late-afternoon hours in the same tile. Given the constraints in the data due to preprocessing by Facebook, it is best interpreted as **a conservative upper bound on the number of individuals that do not go to work** during the day.
 
 As such, it says nothing about how people are moving around near their homes. It also does not represent most of the people that work very close to home. Therefore, it is important to reference this figure with care and to understand that it is primarily the relative change compared to the baseline that offers insight.
 
-Note that there is also a significant portion of municipalities that are not available for inspection. This is because there is not enough data inside these. See '**Data** > Movement Maps' for notes on data loss due to privacy.
+Note that there is also a significant portion of counties that are not available for inspection. This is because there is not enough data inside these. See '**Data** > Movement Maps' for notes on data loss due to privacy.
 
 Also note that this figure is similar to the the one presented in '**Visualizations** > *Where people stay* > Going out'. The figures measure essentially the same thing, but from different perspectives using different datasets.
 
@@ -20,5 +20,5 @@ Also note that this figure is similar to the the one presented in '**Visualizati
 > **This figure is interactive!** You can:
 > * Change the municipality displayed using the **dropdown menu**.
 > * Toggle whether the y-axis displays the absolute measurements (rel{{< color color="white" >}}/{{< /color >}}**abs**) or the deviation from the baseline (**rel**{{< color color="white" >}}/{{< /color >}}abs).
-> * **Hover** the curves to see precise values.
+<!-- >> * **Hover** the curves to see precise values.
 > * **Hover** the marks on the x-axis to see events.

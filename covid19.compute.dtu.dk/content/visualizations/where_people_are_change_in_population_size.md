@@ -6,7 +6,7 @@
 
 
 
-The figures below show how the number of occupants changed over time across Danish municipalities. You can play with the figures as follows: 
+The figures below show how the number of occupants changed over time across counties. You can play with the figures as follows: 
 - Change the (rel{{< color color="white" >}}/{{< /color >}}**abs**) button on the top left of the figure to display absolute values or relative changes with respect to February.
 - Display values computed in a specific time of the day by changing the time interval (All day/10-18/18-02) in the top left of the figure.
 
@@ -16,7 +16,7 @@ You can move the mouse over a line to display the corresponding municipality nam
 
 {{< figures/change_all >}}
 
-The second figure lets you select individual municipalities from the drop-down menu. The dotted line displays the daily data, the red line shows the average over a window of 7 days and the dashed line displays the value computed in the corresponding weekday during February. 
+The second figure lets you select individual counties from the drop-down menu. The dotted line displays the daily data, the red line shows the average over a window of 7 days and the dashed line displays the value computed in the corresponding weekday during February. 
 
 {{< figures/change >}}
 

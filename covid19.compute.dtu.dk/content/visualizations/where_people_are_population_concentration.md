@@ -3,7 +3,8 @@
 
 {{< figures/globals >}}
 
-The figure below displays the **fraction of people that have changed location** compared to a similar time frame before the lockdown. We estimate this variable by summing the positive and absolute negative baseline population deviation across all tiles and dividing my two. Simply, this corresponds to averaging the amount of red and green in the [Landscape visualization](/mobility/popdensevis/index.html), which signals that someone is not where they usually are during this time of the week.
+The figure below displays the **fraction of people that have changed location** compared to a similar time frame before the lockdown. We estimate this variable by summing the positive and absolute negative baseline population deviation across all tiles and dividing my two.
+<!-- Simply, this corresponds to averaging the amount of red and green in the [Landscape visualization](/mobility/popdensevis/index.html), which signals that someone is not where they usually are during this time of the week. -->
 
 Note that the change we see here is *a lower bound* of the actual movement because we can assume there are cases where pairs of people (coincidentally) trade places, which cancels out any measurable deviation in the population distribution. This point is important in interpreting the figure.
 
