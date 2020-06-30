@@ -4,7 +4,14 @@ headless: true
 
 - **[Main Page]({{< relref "/_index.md" >}})**
 - **Posts**
-    - *May*
+    - *Kenya*
+		- [*Kenya*:    
+        Data quality]({{< relref "/posts/data_quality_kenya.md" >}})
+
+	- *Nigeria*
+		- [*Nigeria*:    
+        Data quality]({{< relref "/posts/data_quality_kenya.md" >}})
+	- *Denmark*
     	- [18 - *Denmark*:   
         Back to work]({{< relref "/posts/going_to_work.md" >}})
     	- [14 - *Denmark*:   
@@ -13,6 +20,8 @@ headless: true
         What's happening in my city?]({{< relref "/posts/change_in_population_sizes.md" >}})
     	- [7 - *Denmark*:    
         Population landscape]({{< relref "/posts/population_landscape.md" >}})
+
+		
 - **Visualizations**
 	- *Where people are*
 		- [Landscape]({{< relref "/visualizations/where_people_are_landscape.md" >}})
