@@ -16,7 +16,7 @@ Note that the change we see here is *a lower bound* of the actual movement becau
 > * **Hover** the curves to see precise values.
 > * **Hover** the marks on the x-axis to see events.
 
-The [Gini Index](https://en.wikipedia.org/wiki/Gini_coefficient) is another way of visualizing these changes. This index measures how *unevenly distributed* (or *concentrated*) a distribution is and can, therefore, inform us about trends in how the population spreads out across the country. As we can see from the giant peaks of cities in the Population density maps visualization (see *Visualizing population distribution*), the population is usually very unevenly distributed. We observe in the same map visualization that people spread out during the lockdown, distributing themselves more evenly throughout the country.
+The [Gini Index](https://en.wikipedia.org/wiki/Gini_coefficient) is another way of visualizing these changes. This index measures how *unevenly distributed* (or *concentrated*) a distribution is and can, therefore, inform us about trends in how the population spreads out across the country.
 
 The Gini Index ranges from zero to one. If the population spreads out perfectly such that every tile contains the same number of people, the Gini Index will be zero. If all of Denmark concentrates in a single tile it will be one. In the figure below you can select different timeframes for different parts of the country. The figure below display the Gini Index over time.
 
