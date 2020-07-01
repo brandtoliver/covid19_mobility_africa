@@ -3,6 +3,8 @@
 
 {{< figures/globals >}}
 
+**Pick a country - either Kenya or Nigeria to the right &#8594;**
+
 In the Movement maps dataset, one movement is recorded for each active user. A movement is registered when in time window *t* - 1 a user spends most of their time in location *A*, then in time window *t* spends most of their time in location *B*, and *A* ≠ *B*. If this condition is not met, either because the time of the stay was too short of the user simply didn't move, the length of the movement is set to 0 km.
 
 It is, therefore, clear that the most likely type of movement to be recorded in the Movement maps are trips between home and work.
@@ -18,7 +20,7 @@ Also note that this figure is similar to the the one presented in '**Visualizati
 {{< figures/total_stationarity >}}
 
 > **This figure is interactive!** You can:
-> * Change the municipality displayed using the **dropdown menu**.
+> * Change the county displayed using the **dropdown menu**.
 > * Toggle whether the y-axis displays the absolute measurements (rel{{< color color="white" >}}/{{< /color >}}**abs**) or the deviation from the baseline (**rel**{{< color color="white" >}}/{{< /color >}}abs).
 <!-- >> * **Hover** the curves to see precise values.
 > * **Hover** the marks on the x-axis to see events.
