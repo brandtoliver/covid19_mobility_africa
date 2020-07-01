@@ -4,6 +4,7 @@ type: docs
 ---
 
 # **Mobility in Kenya and Nigeria during COVID-19 lockdown**
+{{< fontsize 14 >}}*Data analysis by [Sebastian Andreasen](mailto:s153522@student.dtu.dk) and [Oliver Brandt](mailto:ob95@me.com).*{{< /fontsize >}}
 
 > {{< lastmod >}}
 
@@ -62,11 +63,11 @@ A detailed descriptions of the datasets is provided in the panel on the left, wh
 ### **Supervisors**
 
 * [Ulf Aslak](https://ulfaslak.com), postdoc (Facebook data, website, figures, text)
-* [Laura Alessandretti](http://laura.alessandretti.com), assistant professor (telco-data, text)
-* [Jonas Lybker Juul](https://www.nbi.dk/~jonassj/), postdoc (Epidemic modeling, Facebook and telco-data, text)
-* [Anna Sapienza](http://www.annasapienza.it), postdoc (Facebook data)
 * [Peter Edsberg Møllgaard](https://orbit.dtu.dk/en/persons/peter-edsberg-møllgaard), research assistant (Facebook data, website, figures)
 * [Sune Lehmann](https://sunelehmann.com/), professor (PI, text)
+<!-- * [Laura Alessandretti](http://laura.alessandretti.com), assistant professor (telco-data, text)
+* [Jonas Lybker Juul](https://www.nbi.dk/~jonassj/), postdoc (Epidemic modeling, Facebook and telco-data, text)
+* [Anna Sapienza](http://www.annasapienza.it), postdoc (Facebook data) -->
 
 
 <!-- {{< columns >}}

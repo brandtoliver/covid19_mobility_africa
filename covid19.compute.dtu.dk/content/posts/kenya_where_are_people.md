@@ -25,4 +25,4 @@ I addition to seeing that people tend to begin to move more in may, we can also 
 
 ![img](/nairobi_pop_map.PNG)
 
-In conclusion, we can see that people tend to stay in the same areas. 
+In conclusion, we can see that people tend to stay in the same areas during the lockdown. 

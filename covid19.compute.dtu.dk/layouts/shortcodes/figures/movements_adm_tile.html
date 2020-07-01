@@ -120,7 +120,8 @@
 			// THIS ONE NEEDS FIXING
 			function idxToDate(i) {
 				let days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-				let date = new Date(2020, 2, 24);
+				//let date = new Date(2020, 2, 24);
+				let date = new Date(2020, 3, 6);
 				date.setHours(date.getHours() + 8 * (i - 1));
 				let dateString = "";
 				dateString += days[date.getDay()] + " ";

@@ -1,5 +1,5 @@
-# **Tile movement in the city**
-{{< fontsize 14 >}}*Data analysis by [Sebastian Andreasen](mailto:sstan@dtu.dk) and [Oliver Brandt](mailto:ob95@me.com).*{{< /fontsize >}}
+# **Movements between city tiles**
+{{< fontsize 14 >}}*Data analysis by [Sebastian Andreasen](mailto:s153522@dtu.dk) and [Oliver Brandt](mailto:ob95@me.com).*{{< /fontsize >}}
 
 {{< figures/globals >}}
 
