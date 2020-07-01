@@ -106,25 +106,40 @@ def create_shape_file_tile(
 
     # TODO: not all tiles are guaranteed, ´end_polygon_name´ should be included.
     # 1. iteration
-    ## nairobi_df = tile_data[
-    ##    (tile_data.start_polygon_name == city) & (tile_data.end_polygon_name == city)
-    ## ]
+    nairobi_df = tile_data[
+        (tile_data.start_polygon_name == city) & (tile_data.end_polygon_name == city)
+    ]
 
     # 2. iteration
-    max_lat = 6.942785785094588
-    min_lat = 6.211551441519991
+    if city == "Lagos":
+        max_lat = 6.942785785094588
+        min_lat = 6.211551441519991
 
-    max_lon = 4.3560791015625
-    min_lon = 2.70538330078125
+        max_lon = 4.3560791015625
+        min_lon = 2.70538330078125
+    
+    elif city == "Abuja":
+        max_lat = 9.492408153765544
+        min_lat = 8.619041018922134
 
-    nairobi_df = tile_data[
-        (
-            (tile_data.end_lat <= max_lat)
-            & (tile_data.end_lat >= min_lat)
-            & (tile_data.end_lon <= max_lon)
-            & (tile_data.end_lon >= min_lon)
-        )
-    ]
+        max_lon = 7.959594726562499
+        min_lon = 6.981811523437499
+        
+    elif city == "Nairobi":
+        max_lat = -0.7909904981540058
+        min_lat = -1.7740084780891991
+
+        max_lon = 37.3590087890625
+        min_lon = 36.2713623046875
+
+    #nairobi_df = tile_data[
+    #    (
+    #        (tile_data.end_lat <= max_lat)
+    #        & (tile_data.end_lat >= min_lat)
+    #        & (tile_data.end_lon <= max_lon)
+    #        & (tile_data.end_lon >= min_lon)
+    #    )
+    #]
 
     # TODO: avoid using ´.first()´. Check if one quadkey by mistake has multiple different ´end_lat´and ´end_lon´.
     unique_tiles = (
@@ -132,6 +147,7 @@ def create_shape_file_tile(
         .first()
         .reset_index()
     )
+
     print(len(unique_tiles))
     shape_file = []
 
@@ -140,7 +156,7 @@ def create_shape_file_tile(
         lat = row.end_lat
         lng = row.end_lon
 
-        size = 0.045  # kenya 0.022 Nigeria 0.045
+        size = 0.022  # kenya 0.022 Nigeria 0.045
 
         # create geodataframe with some variables
         gf = gpd.GeoDataFrame(
@@ -179,7 +195,9 @@ def create_shape_file_tile(
         shape_file.append(gd_feat)
 
     if save_dir != False:
-        full_path = save_dir + city.title() + "tile_geojson.json"
+        full_path = save_dir + country.title() + '_' + city.title() + "tile_geojson.json"
+        #full_path = save_dir + "Nigeria_Abujatile_geojson.json"
+
         with open(full_path, "w") as f:
             json.dump(shape_file, f)
     if file_return:
@@ -187,18 +205,20 @@ def create_shape_file_tile(
 
 
 if __name__ == "__main__":
-    #create_shape_file_tile(
-    #    country="Nigeria",
-        # country="Kenya",
-        # city="Federal Capital Territory",
-    #    city="Lagos",
-        # city="Nairobi",
-    #    save_dir="/Users/oliver/Data_Science/09_covid19_africa/covid19_mobility_africa/covid19.compute.dtu.dk/static/data/",
-    #)
-
-    create_shape_file(
-        "Kenya",
-        adm=1,
+    create_shape_file_tile(
+        #country="Nigeria",
+        country="Kenya",
+        #city="Federal Capital Territory",
+        #city="Abuja",
+        #city="Lagos",
+        #city="Nairobi",
+        city="Mombasa",
         save_dir="/Users/oliver/Data_Science/09_covid19_africa/covid19_mobility_africa/covid19.compute.dtu.dk/static/data/",
     )
+
+    #create_shape_file(
+    #    "Kenya",
+    #    adm=1,
+    #    save_dir="/Users/oliver/Data_Science/09_covid19_africa/covid19_mobility_africa/covid19.compute.dtu.dk/static/data/",
+    #)
 
