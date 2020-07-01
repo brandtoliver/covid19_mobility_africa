@@ -48,7 +48,7 @@ headless: true
 		- [**New** Tile city movement]({{< relref "/visualizations/how_people_move_movements_between_tiles.md" >}})
 		<!-- - [Distance traveled]({{< relref "/visualizations/how_people_move_distance_traveled.md" >}}) -->
 		- [Staying home]({{< relref "/visualizations/how_people_move_staying_home.md" >}})
-		<!-- - [Movements between municipalities]({{< relref "/visualizations/how_people_move_movements_between_municipalities.md" >}}) -->
+		- [Movements between municipalities]({{< relref "/visualizations/how_people_move_movements_between_municipalities.md" >}})
 - **Data**
 	- [Population Density Maps]({{< relref "/data/population_density_maps.md" >}})
 	- [Movement Maps]({{< relref "/data/movement_maps.md" >}})

@@ -74,13 +74,13 @@ def run():
         #    ]
         else:
             pscripts = [
-                # absolute_deviation,
-                # gini_over_time,
+                absolute_deviation,
+                gini_over_time,
                 ##tile_csv_to_geojson,
-                # mobility,
-                # stationarity,
-                # night_day_difference,
-                movements
+                mobility,
+                stationarity,
+                night_day_difference,
+                #movements
             ]
         Parallel(n_jobs=min(8, len(pscripts)))(
             delayed(lambda x: x.run(country, iso, adm_region, adm_kommune))(x)

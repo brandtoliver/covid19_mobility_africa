@@ -29,5 +29,10 @@ let eventDates = {
     'italy':[
     ],
     'iceland':[
-    ]
+	],
+	'nigeria':[["2020-05-27 00:00:00", 'test']
+	],
+	'Kenya':[["2020-05-27 00:00:00", 'test']
+	]
+
 }

@@ -46,6 +46,11 @@ class Movement_adm_tile {
 			.on("zoom", () => this.zoomed());
 		this.svg.call(zoom);
 		*/
+		this.svg1 = d3.select("#vis-movementsFig2")
+			.append("svg")
+			.attr("width", this.width)
+			.attr("height", this.height);
+		this.g1 = this.svg1.append("g1")	
 
 		this.projection = d3.geoIdentity()
 			.reflectY(true)
@@ -66,7 +71,7 @@ class Movement_adm_tile {
 
 		const path = d3.geoPath(projection);
 		*/
-		this.g.selectAll("path").data(this.stateShape.features)
+		this.g1.selectAll("path").data(this.stateShape.features)
 			.enter()
 			.append("path")
 			.attr("d", this.path)
