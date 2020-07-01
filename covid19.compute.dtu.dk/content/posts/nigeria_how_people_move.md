@@ -28,7 +28,7 @@ This can also be seen in the staying home visualization for the Nairobi, where a
 In addition to this, it is interesting to observe how people tend to leave their homes over the weekends. This makes sense as in large cities a lot of the workers are probably born in the countryside and then have moved to the city to find work, which means they spend some of their weekends going back to their families.    
 
 -->
-The visualisation of Lagos above also takes into account the movement within Lagos, but also between Lagos and neighbouring areas. 
+The visualisation of Lagos above not only take into account the movement within Lagos, but also between Lagos and neighbouring regions. 
 
 *Movement around Lagos from 27/3 to 20/5*
 ![img](/tile_lagos_adm.gif)
