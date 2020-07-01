@@ -3,6 +3,7 @@
 
 {{< figures/globals >}}
 
+**Pick a country - either Kenya or Nigeria to the right &#8594;**
 <!-- {{< vspace 20 >}} -->
 
 Using the Movement Maps we can visualize the distribution where people spend their days relative to their nights. While not accurate in every single case, it's perhaps easier to say that we are able to see where people *live* (spend their nights) and *work* (spend their nights). Or even more compactly, that we can look at commuting patterns over time.

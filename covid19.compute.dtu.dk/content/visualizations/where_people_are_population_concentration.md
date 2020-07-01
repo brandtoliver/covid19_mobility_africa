@@ -1,6 +1,8 @@
 # **Population distribution**
 {{< fontsize 14 >}}*Visualization and data analysis by [Ulf Aslak](mailto:ulfaslak@gmail.com) and [Peter Møllgaard](mailto:peter-em@hotmail.com).*{{< /fontsize >}}
 
+**Pick a country - either Kenya or Nigeria to the right &#8594;**
+
 {{< figures/globals >}}
 
 The figure below displays the **fraction of people that have changed location** compared to a similar time frame before the lockdown. We estimate this variable by summing the positive and absolute negative baseline population deviation across all tiles and dividing my two.

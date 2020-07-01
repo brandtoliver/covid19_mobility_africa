@@ -1,6 +1,8 @@
 # **Movements between city tiles**
 {{< fontsize 14 >}}*Data analysis by [Sebastian Andreasen](mailto:sstan@dtu.dk) and [Oliver Brandt](mailto:ob95@me.com).*{{< /fontsize >}}
 
+**Pick a city - either Nairobi or Mombasa in Kenya or Lagos or Abuja in Nigeria to the right &#8594;**
+
 {{< figures/globals >}}
 
 The movement data can provide us with insights on how people are moving between different locations. In this case due to limited data, it has been decided to focus only on the larger cities in Kenya and Nigeria. The movements between tiles are shown for each time-slot. 

@@ -21,4 +21,8 @@ The same conclusion can be found when looking at the gini index for change in po
 *Gini, Kenya:*
 ![img](/kenya_gini.PNG)
 
+I addition to seeing that people tend to begin to move more in may, we can also see that people actually have stopped moving out of the county.
+
+![img](/nairobi_pop_map.PNG)
+
 In conclusion, we can see that people tend to stay in the same areas. 

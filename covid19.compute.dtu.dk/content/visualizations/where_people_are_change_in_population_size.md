@@ -1,6 +1,7 @@
 # **Change in population sizes**
 {{< fontsize 14 >}}*Visualization and data analysis by [Ulf Aslak](mailto:ulfaslak@gmail.com) and [Peter Møllgaard](mailto:peter-em@hotmail.com).*{{< /fontsize >}}
 
+**Pick a country - either Kenya or Nigeria to the right &#8594;**
 
 {{< figures/globals >}}
 
