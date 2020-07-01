@@ -2,3 +2,7 @@
 	path = public
 	url = https://github.com/brandtoliver/brandtoliver.github.io.git
 	branch = master
+[submodule "covid19.compute.dtu.dk/public"]
+	path = covid19.compute.dtu.dk/public
+	url = https://github.com/brandtoliver/brandtoliver.github.io.git
+	branch = master

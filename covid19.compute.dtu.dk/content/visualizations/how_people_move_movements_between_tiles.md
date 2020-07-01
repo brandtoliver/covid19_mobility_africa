@@ -8,7 +8,7 @@
 
 Similar to the visualisation of ´Movement between municipalities´ we can visualize the distribution where people spend their days relative to their nights. This visualisation is made to explore the movement patterns over time within a city. 
 
-This visualisation also based on the three daily time windows and movement of people are calculated exactly the same like the Movement Maps except that is it done between tiles instead of municipalities. For a detailed explanation of the movements are calculated see REF REF REF.
+This visualisation also based on the three daily time windows and movement of people are calculated exactly the same like the Movement Maps except that is it done between tiles instead of municipalities. For a detailed explanation of the movements are calculated see [Movements between municipalities]({{< relref "/visualizations/how_people_move_movements_between_municipalities.md" >}}).
 
 **The map below** displays the day-to-day between-tile travel patterns in a city. By default the map displays *Change*, which is the percentage deviation between the size of the working population on the date selected with the slider, and the corresponding baseline (before lockdown). Clicking *On date* shows value for the date selected in the slider and *Baseline* for the corresponding baseline day. You can click any tile to reveal where people who live there go to work.
 
