@@ -27,3 +27,17 @@ This can also be seen in the staying home visualization for the Nairobi, where a
 
 In addition to this, it is interesting to observe how people tend to leave their homes over the weekends. This makes sense as in large cities a lot of the workers are probably born in the countryside and then have moved to the city to find work, which means they spend some of their weekends going back to their families.    
 
+-->
+The visualisation of Lagos above also takes into account the movement within Lagos, but also between Lagos and neighbouring areas. 
+
+*Movement around Lagos from 27/3 to 20/5*
+![img](/tile_lagos_adm.gif)
+As seen from the figure above, showing the movment in the regions around Lagos (Lagos being the city by the sea in the lower left corner), no clear pattern of how people are moving in Lagos appear (figure from [Movements between municipalities]({{< relref "/visualizations/how_people_move_movements_between_municipalities.md" >}})). This is most likely due to sparsity of movement-data on administaion-level. With Lagos being one of the fastest growing cities in Africa, with a population of around 17.5 million, it deserves a closer look. 
+
+To explore the movement patterns within Lagos and not including the movement to and from the city, we use the visualisation ´Tile city movement´ below. Here each colored tile represent a 3 x 3 km square of Lagos.
+To explore the movement patterns of two biggest cities in Kenya and Nigeria go to the interactive figure here [Tile city movement]({{< relref "/visualizations/how_people_move_movements_between_tiles.md" >}}), where a detailed description of the figure also can be found here. 
+
+*Movement within Lagos from 27/3 to 20/5*
+![img](/tile_lagos.gif)
+Here is clearly observed a decrease in percent change. Going from 40-75 % negative percent change, compared to the baseline, in the first month of the period (27/3 to 21/4) , to a sudden drop to 25% negative percent change on the 23/4. Clearly something significant has occured at this point in time to get people to move around within Lagos agian. 
+
