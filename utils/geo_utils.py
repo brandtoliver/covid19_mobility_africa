@@ -79,7 +79,7 @@ def create_shape_file(
                 geodf.geometry = geodf.geometry.simplify(0.001)
 
     shape_file = [
-        {"kommune": loc["NAME_2"], "polygons": poly_convert(loc["geometry"])}
+        {"kommune": loc["NAME_1"], "polygons": poly_convert(loc["geometry"])}
         for i, loc in geodf.iterrows()
     ]
     if save_dir != False:
@@ -111,11 +111,11 @@ def create_shape_file_tile(
     ## ]
 
     # 2. iteration
-    max_lat = 7.989807128906249
-    min_lat = 6.998291015625
+    max_lat = 6.942785785094588
+    min_lat = 6.211551441519991
 
-    max_lon = 9.538457618319674
-    min_lon = 8.651626379005748
+    max_lon = 4.3560791015625
+    min_lon = 2.70538330078125
 
     nairobi_df = tile_data[
         (
@@ -187,18 +187,18 @@ def create_shape_file_tile(
 
 
 if __name__ == "__main__":
-    create_shape_file_tile(
-        country="Nigeria",
+    #create_shape_file_tile(
+    #    country="Nigeria",
         # country="Kenya",
-        city="Federal Capital Territory",
-        # city='Lagos'
+        # city="Federal Capital Territory",
+    #    city="Lagos",
         # city="Nairobi",
+    #    save_dir="/Users/oliver/Data_Science/09_covid19_africa/covid19_mobility_africa/covid19.compute.dtu.dk/static/data/",
+    #)
+
+    create_shape_file(
+        "Kenya",
+        adm=1,
         save_dir="/Users/oliver/Data_Science/09_covid19_africa/covid19_mobility_africa/covid19.compute.dtu.dk/static/data/",
     )
-
-    # create_shape_file(
-    #    "Kenya",
-    #    adm=2,
-    #    save_dir="/Users/oliver/Data_Science/09_covid19_africa/covid19_mobility_africa/covid19.compute.dtu.dk/static/data/",
-    # )
 

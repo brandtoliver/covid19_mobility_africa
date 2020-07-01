@@ -1,10 +1,11 @@
 class MovementsMapTile {
 
-	constructor(data, geoData, uniqueId) {
+	constructor(data, geoData, uniqueId, geoshape) {
 		// Variables
 		this.data = data;
 		this.geoData = geoData;
 		this.uniqueId = uniqueId;
+		this.geoshape = geoshape
 		this.betweenMax = data._meta.variables.betweenMax;
 		this.inMax = data._meta.variables.inMax;
 		this.outMax = data._meta.variables.outMax;
@@ -41,6 +42,23 @@ class MovementsMapTile {
 
 		this.g = this.svg.append("g");
 
+
+
+
+		this.svg1 = d3.select("#vis-movementsFig2")
+			.append("svg")
+			.attr("width", this.width)
+			.attr("height", this.height);
+
+		this.g1 = this.svg1.append("g1");
+
+		this.projection = d3.geoIdentity()
+			.reflectY(true)
+			.fitWidth(this.width, this.geoshape);
+
+		this.path = d3.geoPath(this.projection);
+
+
 		// Zooming and panning
 		let zoom = d3.zoom()
 			.extent([[100, 18], [this.width, this.height]])
@@ -48,7 +66,18 @@ class MovementsMapTile {
 			.on("zoom", () => this.zoomed());
 		this.svg.call(zoom);
 	}
-
+	renderStates() {
+		//svg.select('#states').remove()
+		//this.k = this.svg.append('k').attr("start_quadkey", "states")
+		this.g1.selectAll("path").data(this.geoshape.features)
+			.enter()
+			.append("path")
+			.attr("d", this.path)
+			.attr("start_quadkey", function (d) { return "quad_" + d.start_quadkey }) // "chaning state_" to quad:
+			.style("fill", "#fff")
+			.attr("stroke", "#000")
+			.attr("stroke-width", 0.9);
+	}
 
 	// Clear and recreate
 	// ------------------
