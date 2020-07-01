@@ -15,10 +15,16 @@ By looking at this plot, we get an overview of how people move around during the
 
 
 {{< columns >}}
-*Beginning of April*
+*Beginning of April, Nairobi*
 ![img](/nairobi_move_1.PNG)
 <--->
-*Beginning of May*
+*Beginning of May, Nairobi*
 ![img](/nairobi_move_2.PNG)
 {{< /columns >}}
+
+This can also be seen in the staying home visualization for the Nairobi, where a small decline in the number of people staying at home is observed. Even though, the staying home plot is less granulated than those above, the trend can be observed, where people start to move around more.  
+
+![img](/staying_home_nairobi.PNG)
+
+In addition to this, it is interesting to observe how people tend to leave their homes over the weekends. This makes sense as in large cities a lot of the workers are probably born in the countryside and then have moved to the city to find work, which means they spend some of their weekends going back to their families.    
 
