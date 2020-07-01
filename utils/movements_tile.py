@@ -307,6 +307,15 @@ def run(country, iso, city, adm_region="adm1", adm_kommune="adm2"):
 
         # 1. iteration
         # remove data not in city adm
+
+        #data_tile = tile_data[
+        #(
+        #    (tile_data.end_lat <= max_lat)
+        #    & (tile_data.end_lat >= min_lat)
+        #    & (tile_data.end_lon <= max_lon)
+        #    & (tile_data.end_lon >= min_lon)
+        #)
+        #]
         data_tile = data_tile[
             (data_tile.start_polygon_name == city)
             & (data_tile.end_polygon_name == city)
@@ -415,15 +424,15 @@ def run(country, iso, city, adm_region="adm1", adm_kommune="adm2"):
     data_out["_meta"]["defaults"]["lonMin"] = cbb[0]
     data_out["_meta"]["defaults"]["lonMax"] = cbb[2]
 
-    with open(f"{PATH_OUT}{city}_movements_between_tiles.json", "w") as fp:
+    with open(f"{PATH_OUT}{country}_{city}_movements_between_tiles.json", "w") as fp:
         json.dump(data_out, fp)
 
 
 if __name__ == "__main__":
     # os.chdir("../")
-    run(country="Nigeria", iso="NG", city="Federal Capital Territory")
+    run(country="Kenya", iso="KE", city="Mombasa")
     # run(country="Kenya", iso="KE", city="Nairobi")
-
+                                #NG
     # _, country, iso, adm_region, adm_kommune = sys.argv
     # run(country, iso, adm_region, adm_kommune)
     # e.g. python movements.py Denmark DK adm1 adm2
