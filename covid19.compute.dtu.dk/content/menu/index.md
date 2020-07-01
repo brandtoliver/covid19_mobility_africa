@@ -9,11 +9,21 @@ headless: true
 
 		- [*Kenya*:    
         Data quality]({{< relref "/posts/data_quality_kenya.md" >}})
+		- [*Kenya*:    
+        Where are people?]({{< relref "/posts/kenya_where_are_people.md" >}})
+		- [*Kenya*:    
+        How people move]({{< relref "/posts/kenya_how_people_move.md" >}})
+
 
 	- **Nigeria**
 	[Timeline]({{< relref "/posts/timeline_nigeria.md" >}})
 		- [*Nigeria*:    
         Data quality]({{< relref "/posts/data_quality_nigeria.md" >}})
+		- [*Nigeria*:    
+        Where are people?]({{< relref "/posts/nigeria_where_are_people.md" >}})
+		- [*Nigeria*:    
+        How people move]({{< relref "/posts/nigeria_how_people_move.md" >}})
+
 
 	<!--	
 	- *Denmark*
